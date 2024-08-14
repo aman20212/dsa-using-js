@@ -10,24 +10,24 @@ sameFrequency(3589578, 5879385) // true
 */
 
 function sameFrequency(num1, num2) {
-    let number1 = num1.toString().split("");
-    let number2 = num2.toString().split("");
-    if (number1.length !== number2.length) {
-        return false;
-    }
-    let obj1 = {};
-    let obj2 = {};
-    for (let num of number1) {
-        obj1[num] = ++obj1[num] || 1;
-    }
-    for (let num of number2) {
-        obj2[num] = ++obj2[num] || 1;
-    }
-    for (let key in obj1) {
-        if (!(key in obj2)) return false;
-        if (obj2[key] !== obj1[key]) return false;
-    }
-    return true;
+  let number1 = num1.toString().split("");
+  let number2 = num2.toString().split("");
+  if (number1.length !== number2.length) {
+    return false;
+  }
+  let obj1 = {};
+  let obj2 = {};
+  for (let num of number1) {
+    obj1[num] = ++obj1[num] || 1;
+  }
+  for (let num of number2) {
+    obj2[num] = ++obj2[num] || 1;
+  }
+  for (let key in obj1) {
+    if (!(key in obj2)) return false;
+    if (obj2[key] !== obj1[key]) return false;
+  }
+  return true;
 }
 
 console.log(sameFrequency(34, 12));
@@ -46,15 +46,15 @@ Restrictions:
 Time - O(n)*/
 
 function areThereDuplicates() {
-    let i = 0;
-    let j = arguments.length - 1;
-    while (i < j) {
-        if (arguments[i] === arguments[j]) {
-            return true;
-        }
-        i = i + 1;
+  let i = 0;
+  let j = arguments.length - 1;
+  while (i < j) {
+    if (arguments[i] === arguments[j]) {
+      return true;
     }
-    return false;
+    i = i + 1;
+  }
+  return false;
 }
 
 
@@ -278,6 +278,35 @@ function minSubArrayLen(arr, num) {
   }
 
   return minLen === Infinity ? 0 : minLen;
+}
+
+// Second Solution to this problem
+function minSubArrayLen(nums, target) {
+  let prevTotal = 0;
+  let lowestRunCount = 0;
+  for (let i = 0; i < nums.length;  i++){
+    prevTotal += nums[i];
+    lowestRunCount++;
+    if (prevTotal >= target) {
+      break;
+    }  
+}
+  // prevTotal = 9
+  // lowestRunCount = 3
+  if (prevTotal < target) {
+      return 0;
+    }
+  for (let i = 1; i < nums.length; i++) {
+    let currentTotal = prevTotal - nums[i-1];
+    if (currentTotal >= target) {
+      lowestRunCount--;
+      prevTotal = currentTotal;
+    } 
+    else {
+      prevTotal = currentTotal + nums[i + lowestRunCount -1];
+    }
+  }
+  return lowestRunCount;
 }
 */
 
