@@ -130,3 +130,265 @@ function isPalindrome(str) {
   }
 }
 */
+
+
+/* 
+someRecursive
+Write a recursive function called someRecursive which accepts an array and a callback. The function returns true if a single value in the array returns true when passed to the callback. Otherwise it returns false.
+
+function someRecursive(arr, fn) {
+    if (arr.length === 0) {
+        return false;
+  }
+  if (fn(arr[0])) {
+        return true;
+  }
+  return someRecursive(arr.slice(1), fn);
+}
+*/
+
+/* 
+Write a recursive function called flatten which accepts an array of arrays and returns a new array with all values flattened.
+
+function flatten(arr) {
+  let result = [];
+  function flattenHelper(arr) {
+    for (let el of arr) {
+      if (Array.isArray(el)) {
+        flattenHelper(el);  // Recursive call for nested arrays
+      } else {
+        result.push(el);   // Correctly add elements to the result array
+      }
+    }
+  }
+  flattenHelper(arr);
+  return result;
+}
+
+// flatten([1, 2, 3, [4, 5] ]) // [1, 2, 3, 4, 5]
+// flatten([1, [2, [3, 4], [[5]]]]) // [1, 2, 3, 4, 5]
+// flatten([[1],[2],[3]]) // [1,2,3]
+// flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]) // [1,2,3
+
+
+
+function flatten(arr) {
+  let result = [];
+  function flattenHelper(arr) {
+    for (let el of arr) {
+      if (Array.isArray(el)) {
+        flattenHelper(el);  // Recursive call for nested arrays
+      } else {
+        result.push(el);   // Correctly add elements to the result array
+      }
+    }
+  }
+  flattenHelper(arr);
+  return result;
+}
+*/
+
+
+/* 
+Write a recursive function called capitalizeFirst. Given an array of strings, capitalize the first letter of each string in the array.
+
+function capitalizeFirst(arr) {
+  if (arr.length === 0) {
+    return [];
+  }
+
+  // Capitalize the first letter and combine it with the rest of the string
+  const capitalizedFirst = arr[0][0].toUpperCase() + arr[0].slice(1);
+  
+  // Recursively call capitalizeFirst for the rest of the array and concatenate
+  return [capitalizedFirst].concat(capitalizeFirst(arr.slice(1)));
+}
+
+
+function capitalizeFirst (arr) {
+  // add whatever parameters you deem necessary - good luck!
+  let capArray = [];
+  function capitalize(arr) {
+        if (arr.length === 0) return;
+    capArray.push(arr[0].charAt(0).toUpperCase() + arr[0].slice(1));
+    capitalize(arr.slice(1));
+  }
+  capitalize(arr);
+  return capArray;
+}
+*/
+
+
+/* 
+Write a recursive function called nestedEvenSum. Return the sum of all even numbers in an object which may contain nested objects.
+
+function nestedEvenSum(obj) {
+    let sum = 0;
+  Object.entries(obj).forEach(([key, value]) => {
+        if (value && typeof(value) === 'object') {
+        sum += nestedEvenSum(value);
+    } else if (typeof(value) === 'number' && value % 2 === 0) {
+    sum += value;
+    }
+  })
+  return sum;
+}
+
+
+function nestedEvenSum (obj) {
+  // add whatever parameters you deem necessary - good luck!
+  let sum = 0;
+  function calculateSum(obj) {
+        Object.entries(obj).forEach(([key, value]) => {
+        if (value && typeof value === 'object') {
+            calculateSum(value);
+      } else if (typeof value === 'number' && value % 2 === 0) {
+            sum+= value;
+      }
+    });
+  }
+  calculateSum(obj);
+  return sum;
+}
+
+
+var obj1 = {
+  outer: 2,
+  obj: {
+    inner: 2,
+    otherObj: {
+      superInner: 2,
+      notANumber: true,
+      alsoNotANumber: "yup"
+    }
+  }
+}
+
+var obj2 = {
+  a: 2,
+  b: {b: 2, bb: {b: 3, bb: {b: 2}}},
+  c: {c: {c: 2}, cc: 'ball', ccc: 5},
+  d: 1,
+  e: {e: {e: 2}, ee: 'car'}
+};
+
+nestedEvenSum(obj1); // 6
+nestedEvenSum(obj2); // 10
+*/
+
+/* 
+Write a recursive function called capitalizeWords. Given an array of words, return a new array containing each word capitalized.
+
+function capitalizeWords(arr) {
+    let newArray = [];
+    if (arr.length === 0) {
+        return [];
+    }
+    newArray.push(arr[0].toUpperCase());
+    return newArray.concat(capitalizeWords(arr.slice(1)));
+}
+
+
+function capitalizeWords(arr) {
+  // Base case: If the array is empty, return an empty array
+  if (arr.length === 0) return [];
+  
+  // Recursively capitalize the words and build the new array
+  return [arr[0].toUpperCase(), ...capitalizeWords(arr.slice(1))];
+}
+
+// let words = ['i', 'am', 'learning', 'recursion'];
+// capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
+
+*/
+
+
+/* 
+Write a function called stringifyNumbers which takes in an object and finds all of the values which are numbers and converts them to strings. Recursion would be a great way to solve this!
+
+The exercise intends for you to create a new object with the numbers converted to strings, and not modify the original. Keep the original object unchanged.
+
+function stringifyNumbers(obj) {
+  let newObj = {};  // Create a new object to store the transformed values
+  
+  Object.entries(obj).forEach(([key, value]) => {
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      // Recursively call stringifyNumbers on nested objects
+      newObj[key] = stringifyNumbers(value);
+    } else if (typeof value === 'number') {
+      // Convert number values to strings
+      newObj[key] = value.toString();
+    } else {
+      // For other types, just copy the value
+      newObj[key] = value;
+    }
+  });
+
+  return newObj;
+}
+
+
+let obj = {
+    num: 1,
+    test: [],
+    data: {
+        val: 4,
+        info: {
+            isRight: true,
+            random: 66
+        }
+    }
+}
+
+
+stringifyNumbers(obj)
+
+
+{
+    num: "1",
+    test: [],
+    data: {
+        val: "4",
+        info: {
+            isRight: true,
+            random: "66"
+        }
+    }
+}
+
+*/
+
+/* 
+Write a function called collectStrings which accepts an object and returns an array of all the values in the object that have a typeof string
+
+function collectStrings(obj) {
+    let newArray = [];
+  Object.entries(obj).forEach(([key, value]) => {
+        if (value && typeof value === 'object') {
+    console.log(collectStrings(value));
+        newArray = newArray.concat(collectStrings(value));
+    } else if (value && typeof value === 'string') {
+        newArray.push(value.toString());
+    }
+  });
+  return newArray;
+}
+
+const obj = {
+    stuff: "foo",
+    data: {
+        val: {
+            thing: {
+                info: "bar",
+                moreInfo: {
+                    evenMoreInfo: {
+                        weMadeIt: "baz"
+                    }
+                }
+            }
+        }
+    }
+}
+
+collectStrings(obj) // ["foo", "bar", "baz"])
+*/
