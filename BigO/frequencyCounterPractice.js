@@ -43,7 +43,19 @@ areThereDuplicates(1, 2, 2) // true
 areThereDuplicates('a', 'b', 'c', 'a') // true 
 Restrictions:
 
-Time - O(n)*/
+Time - O(n)
+Restrictions:
+
+Time - O(n)
+
+Space - O(n)
+
+Bonus:
+
+Time - O(n log n)
+
+Space - O(1)
+*/
 
 function areThereDuplicates() {
   let i = 0;
@@ -56,6 +68,49 @@ function areThereDuplicates() {
   }
   return false;
 }
+
+/* 
+Time and Space Complexity:
+Time complexity: Sorting the array takes O(n log n), and the check for duplicates takes O(n). Thus, the overall time complexity is O(n log n).
+Space complexity: The space complexity is O(1) because the sorting is done in place without using extra data structures. The only additional space is for the variables, but this does not grow with the size of the input.
+
+*/
+
+
+function areThereDuplicates(...args) {
+  // Sort the arguments
+  args.sort();
+
+  // Check adjacent elements for duplicates
+  for (let i = 0; i < args.length - 1; i++) {
+    if (args[i] === args[i + 1]) {
+      return true; // Duplicate found
+    }
+  }
+
+  return false; // No duplicates found
+}
+
+// Test cases
+console.log(areThereDuplicates(1, 2, 3)); // false
+console.log(areThereDuplicates(1, 2, 2)); // true
+console.log(areThereDuplicates('a', 'b', 'c', 'a')); // true
+
+
+function areThereDuplicates(...args) {
+  args.sort();
+  let i = 0;
+  for (let j = 1; j < args.length; j++) {
+    if (args[i] === args[j]) {
+      return true;
+    }
+    i++;
+    args[i] = args[j];
+  }
+  return false;
+}
+
+/* ========================================================================= */
 
 
 /*SOLUTIONS PART 1
