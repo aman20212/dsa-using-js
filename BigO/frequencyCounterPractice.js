@@ -214,6 +214,31 @@ console.log(averagePair([1,2,3],2.5));
 
 ---->
 
+------> Solution2
+function averagePair(arr, avg) {
+    let i = 0;  // pointer at the start of the array
+    let j = arr.length - 1;  // pointer at the end of the array
+    
+    // Loop until the two pointers meet
+    while (i < j) {
+        // Calculate the average of the pair
+        const currentAvg = (arr[i] + arr[j]) / 2;
+        
+        if (currentAvg === avg) {
+            return true;  // Pair found with the correct average
+        } else if (currentAvg < avg) {
+            i++;  // If current average is less, move i to the right
+        } else {
+            j--;  // If current average is more, move j to the left
+        }
+    }
+    
+    return false;  // No pair found
+}
+
+
+----------------->
+
 */
 
 /* 
