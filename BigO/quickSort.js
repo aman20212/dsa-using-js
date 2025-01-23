@@ -131,5 +131,31 @@ const arr = [4, 6, 9, 1, 2, 5, 3];
 console.log("Sorted Array: ", quickSort(arr));
 
 
+Why middle and pivot come before right:
+The pivot is the element that is used to divide the array into two parts: the elements less than the pivot(left) and the elements greater than the pivot(right).
+
+  middle(which contains values equal to the pivot) is placed right after the sorted left part and before the pivot.This ensures that all occurrences of the pivot are grouped together.
+
+The pivot comes after the middle elements because the pivot element itself has already been selected as the dividing point between the two partitions(left and right).So, after the sorted left portion and any equal elements, we place the pivot in its correct sorted position.
+
+  quickSort(right) is the last part because the right partition contains values greater than the pivot.These values will naturally come after the pivot in the final sorted array.
+
+Example for Clarity:
+Let’s say we are sorting this array: [3, 6, 8, 10, 1, 2, 1].
+
+Initial Pivot: Let’s take 1 as the pivot(last element in this case).
+Left Partition: All elements less than 1 →[](empty).
+Middle Partition: All elements equal to 1 →[1, 1].
+Right Partition: All elements greater than 1 →[3, 6, 8, 10, 2].
+Recursively applying QuickSort:
+
+quickSort(left) on[] returns[](base case).
+  quickSort(right) on[3, 6, 8, 10, 2] continues the process.
+After sorting the left and right partitions, we combine them as:
+
+[] + [1, 1] + [pivot] + quickSort(right)
+This maintains the correct relative order and places the pivot between the sorted left and right partitions.
+
+
 
 
