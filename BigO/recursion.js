@@ -68,6 +68,13 @@ function reverse(str) {
   return reverse(str.slice(1))+str[0];
 }
 
+function reverse(str) {
+  if (str.length === 0){
+    return '';
+  }
+  return str[str.length -1] + reverse(str.slice(0, str.length -1));
+}
+
 
 function reverse(str) {
   // Define the recursive function
@@ -129,6 +136,21 @@ function isPalindrome(str) {
     return false;
   }
 }
+
+function isPalindrome(str) {
+  // Helper function to build the reversed string recursively
+  function reverse(str) {
+    // Base case: if the string is empty or has one character, return it
+    if (str.length <= 1) {
+      return str;
+    }
+    // Recursively build the reversed string
+    return str[str.length - 1] + reverse(str.slice(0, str.length - 1));
+  }
+  
+  // Compare the original string with the reversed string
+  return str === reverse(str);
+}
 */
 
 
@@ -173,19 +195,38 @@ function flatten(arr) {
 
 
 function flatten(arr) {
-  let result = [];
-  function flattenHelper(arr) {
-    for (let el of arr) {
-      if (Array.isArray(el)) {
-        flattenHelper(el);  // Recursive call for nested arrays
-      } else {
-        result.push(el);   // Correctly add elements to the result array
-      }
-    }
+  // Base case: If the array is empty, return an empty array
+  if (arr.length === 0) {
+    return [];
   }
-  flattenHelper(arr);
-  return result;
+
+  // Get the first element of the array
+  let first = arr[0];
+
+  // If the first element is an array, recursively flatten it
+  if (Array.isArray(first)) {
+    // Concatenate the flattened first element with the result of flattening the rest of the array
+    return flatten(first).concat(flatten(arr.slice(1)));
+  } else {
+    // If the first element is not an array, just add it to the result
+    return [first].concat(flatten(arr.slice(1)));
+  }
 }
+
+// function flatten(arr) {
+// 	let newArr = [];
+//   if(arr.length === 0) {
+//   	return [];
+//   }
+//   for (let el of arr) {
+//   	if (Array.isArray(el)) {
+//     	newArr = newArr.concat(flatten(el));
+//     } else {
+//     	newArr.push(el);
+//     }
+//   }
+//   return newArr;
+// }
 */
 
 
